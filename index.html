@@ -3,11 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <title>Quiz App</title>
-        <link  href="./style.css" rel="stylesheet">
+        <link  href="./assets/style.css" rel="stylesheet">
     </head>
 
     <body>
-        <header class="body-header">
+        <!-- <header class="body-header">
             <div>
             <p class="time text-right"></p>
             </div>
@@ -16,27 +16,42 @@
                 <p class="text-left">View Highscores</p>
             </div>
 
-        </header>
+        </header> -->
         <main>
             <div class="container">
-                <div id="question-container">
-                    <div id="question">
-                        <h2>Question</h2>
-                    </div>
-                    <div id="answer-buttons">
-                        <button class="button">answer 1</button>
-                        <button class="button">answer 2</button>
-                        <button class="button">answer 3</button>
-                        <button class="button">answer 4</button>
-                    </div>
-                    
-                    <div class="controls">
-                        <button id="start-button" class="button">Start</button> <!--does this need a class ="start-btn btn"-->
-                        <button id="next-button" class="button">Next</button>
-                    </div>
+                <div id="start-container" class="flex-column flex-center">
+                    <h2>Code Quiz Challenge</h2>
+                    <p> In this quiz you will be asked questions on code. you will have a 20 second time limit. if a question is missed then time will be reduced. The quiz will end once all answers are completed or if time runs out. Good luck!</p>
+                    <button class="button start-button">Start</button>
+                    <button id="highscore-button" class="button">High Scores</button>
                 </div>
             </div>
-        </main>
+            
+           
+            <div id="question-container" class="hide">
+                <!-- <div class="flex-column flex-left">  -->
+                    <!-- <p>1/10</p> -->
+                    <p class="bold-text question-text"></p>
+                <div class="answer-container"> 
+                    <button id="btn0" class="qbutton"></button>
+                    <button id="btn1" class="qbutton"></button> 
+                    <button id="btn2" class="qbutton"></button> 
+                    <button id="btn3" class="qbutton"></button> 
+                </div>
+            </div>
 
+
+            
+
+            
+                            
+                <!-- <div class="controls">
+                        <button id="start-button" class="button">Start</button> 
+                        <button id="next-button" class="button hide">Next</button> 
+                </div>  -->
+        
+            
+        </main>
+        <script src="./assets/script.js"></script>
     </body>
 </html>
