@@ -55,6 +55,11 @@ p {
     margin-bottom: 1rem;
 }
 
+.button:hover {
+    box-shadow: 0 0.4rem 1.4rem;
+    transform: scale(1.03);
+}
+
 #question-container {
     background-color: antiquewhite;
     width: 100vw;
@@ -79,7 +84,14 @@ p {
 
 .qbutton {
     font-size: 1.6rem;
+    padding: 0 0.5rem;
+    margin-bottom: 0.5rem;
     /* display: none; */
+}
+
+.qbutton:hover {
+    /* box-shadow: 0 0.4rem 1.4rem; */
+    transform: scale(1.02);
 }
 
 .hide {
