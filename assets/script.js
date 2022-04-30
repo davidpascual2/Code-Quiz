@@ -16,19 +16,19 @@ var questionList = [
 
     {
         questionText: "what color is the sky",
-        choices: ["blue", "red,", "green", "purple"],
+        choices: ["blue", "red", "green", "purple"],
         answer: "blue"
     },
 
     {
         questionText: "What does HTML mean?",
-        choices: ["hello", "hi there,", "exmaple", "okay"],
+        choices: ["hello", "hi there", "exmaple", "okay"],
         answer: "hello"
     },
 
     {
         questionText: "What does HTML mean?",
-        choices: ["hello", "hi there,", "exmaple", "okay"],
+        choices: ["hello", "hi there", "exmaple", "okay"],
         answer: "hello"
     },
 ]
@@ -43,20 +43,28 @@ startButton.addEventListener("click", startGame) //prevent default? where does i
 function startGame(){
 
     score = 0
+    startButton.style.display="none";
+    questionContainerElement.classList.remove("hide");
     // questionList = getQuestionsList()
     // timeLeft = 0
     // console.log("Hey you clicked the start button!");
-    startButton.style.display="none";
     //shuffledQuestions = questions.sort(() => Math.random() -.5);
     // currentQuestionIndex = 0 //what does this do (starting on first question from questions array)
-    questionContainerElement.classList.remove("hide");
     
-    showQuesion(); //create function below. cannot call if there is no function
+    
+    showQuestion(); //create function below. cannot call if there is no function
 }
 
 
 //set next question fucntion once next is pressed
-function showQuesion(){
+
+function quizIndex(){ 
+    // check if user right or wrong 
+    currentQuestion = currentQuestion + 1;
+    showQuestion()
+}
+
+function showQuestion(){
     var questionTextEl = document.querySelector(".question-text");
     questionTextEl.innerText = questionList[currentQuestion].questionText;
 
@@ -79,6 +87,8 @@ function showQuesion(){
         var buttonEl = document.querySelector("#btn" + i)
         console.log("btn" + i); // this prints
         buttonEl.innerText = questionList[currentQuestion].choices[i]
+        buttonEl.addEventListener("click", quizIndex)
+    
     }
 
 } 
