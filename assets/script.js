@@ -1,11 +1,11 @@
 
-// var secondsLeft = 20;
-
+var TimerEl = document.querySelector(".timer");
 var startButton = document.querySelector(".container"); //.start-button
 var questionContainerEl = document.querySelector("#question-container");
 var answerButtonsEl = document.querySelector(".qbutton") //why is this needed?
 let currentQuestion = 0 //set to 0 because we want to start on first Question of questions array
 let curScore = 0;
+// let QuizEnd = document.queryselector(".gameover"); ???
 //var timerEl = document.querySelector(".timer");
 
 var questionList = [
@@ -29,7 +29,7 @@ var questionList = [
 
     {
         questionText: "What does HTML mean?",
-        choices: ["Hyper Text Markup Language", "Hyper Text Marketing Language", "Hyper Text Markup Language", "Hyper Trainer Marking Language"],
+        choices: ["Hyper Text Markup Language", "Hyper Text Marketing Language", "Hyper Tension Marketing Language", "Hyper Trainer Marking Language"],
         answer: "Hyper Text Markup Language"
     },
 ]
@@ -38,6 +38,10 @@ startButton.addEventListener("click", startGame) //prevent default? where does i
 
 // function gameOver(){
 //     showQuestion("gameover");
+// }
+
+// function TimeLeft() {
+//     timerEl.innerText = 
 // }
 //start the game
 function startGame(){
@@ -55,31 +59,33 @@ function startGame(){
 
 
 //set next question fucntion once next is pressed
-// function selectAnswer(){ 
     function selectAnswer(event){ 
         // check if user right or wrong 
         if(event.target.innerText === questionList[currentQuestion].answer){
             console.log("correct");
             curScore += 1;
+            // event.target.classList.add(".green")
             console.log(curScore);
         }else{
             console.log("wrong");
+            // event.target.classList.add(".red")
             curScore = score - 1
         }
+        // setTimeout(showQuestion, 1000);
     
-        currentQuestion = currentQuestion + 1;
-        showQuestion()
-    //     currentQuestion = currentQuestion + 1; //transitions to next question when button clicked
-    // showQuestion()
+        currentQuestion = currentQuestion + 1; //transitions to next question when button clicked
+        if (currentQuestion < questionList.length) {
+            showQuestion()
+        } else {
+            console.log("Quiz Completed!")
+        }
+        
     }
     
     // check if user right or wrong
     
-    // currentQuestion = currentQuestion + 1; //transitions to next question when button clicked
-    // showQuestion()
-// }
 
-function showQuestion(){
+    function showQuestion(){
     // if (questionList === 0) {
     //     gameOver()
     // } else {
