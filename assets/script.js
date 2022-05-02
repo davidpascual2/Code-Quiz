@@ -5,6 +5,7 @@ var questionContainerEl = document.querySelector("#question-container");
 var answerButtonsEl = document.querySelector(".qbutton") //why is this needed?
 let currentQuestion = 0 //set to 0 because we want to start on first Question of questions array
 let curScore = 0;
+var timeLeft = 20;
 let QuizEndEl = document.querySelector("#results-container"); 
 var timerEl = document.querySelector(".timer");
 
@@ -43,7 +44,6 @@ function gameOver(){
 }
 
 function countdown() {
-    var timeLeft = 5;
   
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function () {
@@ -105,12 +105,14 @@ function selectAnswer(event){
     if(event.target.innerText === questionList[currentQuestion].answer){
         console.log("correct");
         curScore += 1;
+        // add correct choice button here
         // event.target.classList.add(".green")
         console.log(curScore);
     }else{
         console.log("wrong");
         // event.target.classList.add(".red")
-        curScore = curScore - 1
+        curScore = curScore - 1;
+        timeLeft -= 5;
     }
         // setTimeout(showQuestion, 1000);
 
