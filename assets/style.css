@@ -98,6 +98,18 @@ p {
 display: none;
 }
 
+header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+
+}
+
+.timer {
+    font-size: 1.4rem;
+    padding: 0 0.5rem;
+}
+
 .green {
 background-color: green;
 }
