@@ -62,6 +62,7 @@ p {
 
 #question-container {
     background-color: antiquewhite;
+    /* border: 0.2rem solid blue; */
     width: 100vw;
     /* height: 100vh; */
     max-width: 70rem;
@@ -111,9 +112,9 @@ header {
 }
 
 .green {
-color: green;
+background-color: green;
 }
 
 .red {
-color: red;
+background-color: red;
 }

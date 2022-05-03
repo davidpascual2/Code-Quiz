@@ -5,9 +5,11 @@ var questionContainerEl = document.querySelector("#question-container");
 var answerButtonsEl = document.querySelector(".qbutton") //why is this needed?
 let currentQuestion = 0 //set to 0 because we want to start on first Question of questions array
 let curScore = 0;
-var timeLeft = 20;
-let QuizEndEl = document.querySelector("#results-container"); 
+var timeLeft = 10;
+let quizEndEl = document.querySelector("#results-container"); 
 var timerEl = document.querySelector(".timer");
+var highscoresEl = document.querySelector("#highscores-container");
+// var saveScoreButton = document.querySelector("#highscores") //.save-button
 
 var questionList = [
     {
@@ -36,12 +38,26 @@ var questionList = [
 ]
 
 startButton.addEventListener("click", startGame); //prevent default? where does it go?
+// saveScoreButton = addEventListener("click", highscores);
 
-function gameOver(){
+// function highscores() {
+//     quizEndEl.style.display="none";
+//     highscoresEl.classList.remove("hide");
+// }
+
+function gameOver() {
     questionContainerEl.style.display="none";
-    QuizEndEl.classList.remove("hide");
+    quizEndEl.classList.remove("hide");
     document.querySelector(".finalscore").textContent = "you scored " + curScore + " points";
+    
 }
+
+// function showHighscores() {
+//     questionContainerEl.style.display="none";
+//     highscoresEl.classList.remove("hide");
+//     document.querySelector(".top-scores")
+    
+// }
 
 function countdown() {
   
@@ -68,6 +84,7 @@ function countdown() {
     }, 1000);
   }
 
+
 //start the game
 function startGame(){
 
@@ -91,7 +108,8 @@ function showQuestion(){
     //displays button options with event listener. 
     for(i=0; i < 4; i++){
         console.log(i) // this shows that the loop registered answer buttons
-        var buttonEl = document.querySelector("#btn" + i)
+        var buttonEl = document.querySelector("#btn" + i);
+        buttonEl.style.backgroundColor = "lightgrey"; // ?????
         console.log("btn" + i); // this prints
         buttonEl.innerText = questionList[currentQuestion].choices[i]
         buttonEl.addEventListener("click", selectAnswer)
@@ -106,19 +124,19 @@ function selectAnswer(event){
         console.log("correct");
         curScore += 1;
         // add correct choice button here
-        // event.target.classList.add(".green")
+        event.target.setAttribute("style", "background-color:green;")
         console.log(curScore);
     }else{
         console.log("wrong");
-        // event.target.classList.add(".red")
-        curScore = curScore - 1;
-        timeLeft -= 5;
+        event.target.setAttribute("style", "background-color:red;")
+        // curScore = curScore - 1;
+        timeLeft -= 3;
     }
-        // setTimeout(showQuestion, 1000);
 
     currentQuestion = currentQuestion + 1; //transitions to next question when button clicked
     if (currentQuestion < questionList.length) {
-        showQuestion()
+        setTimeout(showQuestion, 2000); // putting a set timeout here prevents the next question from appearing immediatly 
+        // showQuestion()
     } else {
         console.log("Quiz Completed!");
         gameOver();
@@ -144,4 +162,33 @@ function selectAnswer(event){
     // choiceButton3.innerText = questions[currentQuestion].choices[3];
 
 
+
+
+    // var student = document.getElementById("student-names");
+    // var grade = document.getElementById("grades");
+    // var comment = document.getElementById("msg");
+    // var saveButton = document.getElementById("save");
+    // var savedName = document.getElementById("saved-name");
+    
+    // saveButton.addEventListener("click", function(event) {
+    // event.preventDefault();
+    
+    // var studentGrade = {
+    //   student: student.value,
+    //   grade: grade.value,
+    //   comment: comment.value.trim()
+    // };
+    
+    // localStorage.setItem("studentGrade", JSON.stringify(studentGrade));
+    // renderMessage();
+    
+    // });
+    
+    // function renderMessage() {
+    //   var lastGrade = JSON.parse(localStorage.getItem("studentGrade"));
+    //   if (lastGrade !== null) {
+    //     document.querySelector(".message").textContent = lastGrade.student + 
+    //     " received a/an " + lastGrade.grade
+    //   }
+    // }
 
