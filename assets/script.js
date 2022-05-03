@@ -8,8 +8,9 @@ let curScore = 0;
 var timeLeft = 10;
 let quizEndEl = document.querySelector("#results-container"); 
 var timerEl = document.querySelector(".timer");
+
 var highscoresEl = document.querySelector("#highscores-container");
-// var saveScoreButton = document.querySelector("#highscores") //.save-button
+// var saveScoreButton = document.querySelector("#highscores-container") //.save-button
 
 var questionList = [
     {
@@ -38,12 +39,14 @@ var questionList = [
 ]
 
 startButton.addEventListener("click", startGame); //prevent default? where does it go?
-// saveScoreButton = addEventListener("click", highscores);
+highscoresEl.addEventListener("click", highscores);
 
-// function highscores() {
-//     quizEndEl.style.display="none";
-//     highscoresEl.classList.remove("hide");
-// }
+function highscores(e) {
+    e.preventDefault();
+    startButton.style.display="none";
+    highscoresEl.classList.remove("hide");
+
+}
 
 function gameOver() {
     questionContainerEl.style.display="none";
@@ -52,12 +55,6 @@ function gameOver() {
     
 }
 
-// function showHighscores() {
-//     questionContainerEl.style.display="none";
-//     highscoresEl.classList.remove("hide");
-//     document.querySelector(".top-scores")
-    
-// }
 
 function countdown() {
   
