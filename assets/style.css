@@ -120,5 +120,23 @@ background-color: red;
 }
 
 #highscores-container {
-    
+    text-align: center;
+}
+
+#results-container {
+    text-align: center;
+    /* font-size: 1.4rem; */
+}
+
+.finalscore {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    font-size: 1.6rem;
+}
+
+.save-button {
+    font-size: 1.6rem;
 }

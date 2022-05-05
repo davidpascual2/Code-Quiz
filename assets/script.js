@@ -8,9 +8,11 @@ let curScore = 0;
 var timeLeft = 10;
 let quizEndEl = document.querySelector("#results-container"); 
 var timerEl = document.querySelector(".timer");
-
+var highscoreButtonEl = document.querySelector("#highscore-button")
 var highscoresEl = document.querySelector("#highscores-container");
-// var saveScoreButton = document.querySelector("#highscores-container") //.save-button
+var saveScoreButton = document.querySelector(".save-button") //.save-button
+
+var playAgainButton = document.querySelector(".play-again")
 
 var questionList = [
     {
@@ -39,11 +41,22 @@ var questionList = [
 ]
 
 startButton.addEventListener("click", startGame); //prevent default? where does it go?
-highscoresEl.addEventListener("click", highscores);
+highscoreButtonEl.addEventListener("click", highscores);
+saveScoreButton.addEventListener("click", highscores);
+playAgainButton.addEventListener("click", refreshPage);
+// localStorage.setItem("studentGrade", JSON.stringify(studentGrade));
+    // renderMessage();
+
+function refreshPage() {
+    window.location.reload()
+
+    }
 
 function highscores(e) {
     e.preventDefault();
     startButton.style.display="none";
+    questionContainerEl.style.display="none";
+    quizEndEl.style.display="none";
     highscoresEl.classList.remove("hide");
 
 }
@@ -54,6 +67,16 @@ function gameOver() {
     document.querySelector(".finalscore").textContent = "you scored " + curScore + " points";
     
 }
+
+// function showHighscore() {
+//     e.preventDefault();
+//     quizEndEl.style.display="none";
+//     console.log("highscore")
+
+
+
+// }
+// // saveScoreButton.addEventListener("click", showHighscore);
 
 
 function countdown() {
@@ -81,13 +104,13 @@ function countdown() {
     }, 1000);
   }
 
-
 //start the game
 function startGame(){
-
     curScore = 0;
+    // highscoresEl.style.display="none";
     startButton.style.display="none";
     questionContainerEl.classList.remove("hide");
+
     // questionList = getQuestionsList()
     // timeLeft = 0
     //shuffledQuestions = questions.sort(() => Math.random() -.5);
@@ -141,8 +164,6 @@ function selectAnswer(event){
     
 }
     
-    // check if user right or wrong
-
 
 // how to manually call buttons //
 
@@ -189,3 +210,25 @@ function selectAnswer(event){
     //   }
     // }
 
+
+    // saveScoreButton.addEventListener("click", function(event) {
+    // event.preventDefault();
+    
+    // var studentGrade = {
+    //   student: student.value,
+    //   grade: grade.value,
+    //   comment: comment.value.trim()
+    // };
+    
+    // localStorage.setItem("curScore", JSON.stringify(curScore));
+    // renderMessage();
+    
+    // });
+    
+    // function renderMessage() {
+    //   var curScore = JSON.parse(localStorage.getItem("studentGrade"));
+    //   if (curScore !== null) {
+    //     document.querySelector(".message").textContent = curScore.student + 
+    //     " received a/an " + lastGrade.grade
+    //   }
+    // }
