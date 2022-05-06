@@ -50,7 +50,8 @@ playAgainButton.addEventListener("click", refreshPage);
 function refreshPage() {
     window.location.reload()
 
-    }
+}
+
 
 function highscores(e) {
     e.preventDefault();
@@ -59,7 +60,31 @@ function highscores(e) {
     quizEndEl.style.display="none";
     highscoresEl.classList.remove("hide");
 
+    var scoreInputEl = document.querySelector("#score-input") 
+    console.log("score input", scoreInputEl.value, "total score", curScore );
+
+    var totalScore = { //totalScore - object
+      initials: scoreInputEl.value, // property
+      score: curScore // property
+
+   };
+    
+    localStorage.setItem( "totalScore", JSON.stringify(totalScore)); // total score - key // this will save score and intials into browsers local storage
 }
+
+function renderMessage() { // pulls out of local storage and parses it
+      var totalScore = JSON.parse(localStorage.getItem("totalScore")); //retireive using key name "totalScore"
+      if (totalScore !== null) {
+        document.querySelector(".top-scores").textContent = totalScore.initials + //this will append 
+        " received a/an " + totalScore.score
+      }
+    }
+
+
+function showHighscore() {
+    e.preventDefault();
+}
+
 
 function gameOver() {
     questionContainerEl.style.display="none";
@@ -67,17 +92,6 @@ function gameOver() {
     document.querySelector(".finalscore").textContent = "you scored " + curScore + " points";
     
 }
-
-// function showHighscore() {
-//     e.preventDefault();
-//     quizEndEl.style.display="none";
-//     console.log("highscore")
-
-
-
-// }
-// // saveScoreButton.addEventListener("click", showHighscore);
-
 
 function countdown() {
   
@@ -217,7 +231,7 @@ function selectAnswer(event){
     // var studentGrade = {
     //   student: student.value,
     //   grade: grade.value,
-    //   comment: comment.value.trim()
+   
     // };
     
     // localStorage.setItem("curScore", JSON.stringify(curScore));
