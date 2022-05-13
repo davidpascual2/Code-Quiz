@@ -11,35 +11,11 @@ var timerEl = document.querySelector(".timer");
 var highscoreButtonEl = document.querySelector("#highscore-button")
 var highscoresEl = document.querySelector("#highscores-container");
 var saveScoreButton = document.querySelector(".save-button") //.save-button
+var topScoreList = document.querySelector(".top-scores")
 
 var playAgainButton = document.querySelector(".play-again")
 
-var questionList = [
-    {
-        questionText: "javaScript file has an extension of",
-        choices: [".java", ".js", ".javascript", ".xml"], 
-        answer: ".js"
-    },
-
-    {
-        questionText: "An array Index starts with?",
-        choices: ["-1", "0", "1", "2"],
-        answer: "0"
-    },
-
-    {
-        questionText: "In what year was javascript created?",
-        choices: ["1970", "1990", "1995", "1981"],
-        answer: "1995"
-    },
-
-    {
-        questionText: "What does HTML mean?",
-        choices: ["Hyper Text Markup Language", "Hyper Text Marketing Language", "Hyper Tension Marketing Language", "Hyper Trainer Marking Language"],
-        answer: "Hyper Text Markup Language"
-    },
-]
-
+//click event 
 startButton.addEventListener("click", startGame); //prevent default? where does it go?
 highscoreButtonEl.addEventListener("click", highscores);
 saveScoreButton.addEventListener("click", highscores);
@@ -49,76 +25,9 @@ playAgainButton.addEventListener("click", refreshPage);
 
 function refreshPage() {
     window.location.reload()
-
 }
 
-
-function highscores(e) {
-    e.preventDefault();
-    startButton.style.display="none";
-    questionContainerEl.style.display="none";
-    quizEndEl.style.display="none";
-    highscoresEl.classList.remove("hide");
-
-    var scoreInputEl = document.querySelector("#score-input") 
-    console.log("score input", scoreInputEl.value, "total score", curScore );
-
-    var totalScore = { //totalScore - object
-      initials: scoreInputEl.value, // property
-      score: curScore // property
-
-   };
-    
-    localStorage.setItem( "totalScore", JSON.stringify(totalScore)); // total score - key // this will save score and intials into browsers local storage
-}
-
-function renderMessage() { // pulls out of local storage and parses it
-      var totalScore = JSON.parse(localStorage.getItem("totalScore")); //retireive using key name "totalScore"
-      if (totalScore !== null) {
-        document.querySelector(".top-scores").textContent = totalScore.initials + //this will append 
-        " received a/an " + totalScore.score
-      }
-    }
-
-
-function showHighscore() {
-    e.preventDefault();
-}
-
-
-function gameOver() {
-    questionContainerEl.style.display="none";
-    quizEndEl.classList.remove("hide");
-    document.querySelector(".finalscore").textContent = "you scored " + curScore + " points";
-    
-}
-
-function countdown() {
-  
-    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-    var timeInterval = setInterval(function () {
-      // As long as the `timeLeft` is greater than 1
-      if (timeLeft > 1) {
-        // Set the `textContent` of `timerEl` to show the remaining seconds
-        timerEl.textContent = timeLeft + ' seconds remaining';
-        // Decrement `timeLeft` by 1
-        timeLeft--;
-      } else if (timeLeft === 1) {
-        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-        timerEl.textContent = timeLeft + ' second remaining';
-        timeLeft--;
-      } else {
-        // Once `timeLeft` gets to 0, set `timerEl` to an empty string
-        timerEl.textContent = '';
-        // Use `clearInterval()` to stop the timer
-        clearInterval(timeInterval);
-        // Call the `displayMessage()` function
-        gameOver();
-      }
-    }, 1000);
-  }
-
-//start the game
+//once start button is clicked, start page is hidden and quiz begins
 function startGame(){
     curScore = 0;
     // highscoresEl.style.display="none";
@@ -177,6 +86,118 @@ function selectAnswer(event){
     }
     
 }
+
+
+function highscores(e) {
+    e.preventDefault();
+    startButton.style.display="none";
+    questionContainerEl.style.display="none";
+    quizEndEl.style.display="none";
+    var totalScoreStorage = localStorage.getItem("totalScore"); 
+    //for loop loop through total scores for each entry (intitials and scores)
+    // create li for each entry and append it to highscore list 
+    //65-67 needs to be in for loop
+    var li = document.createElement("li");
+    li.textContent = "hello";
+    topScoreList.appendChild(li)
+    highscoresEl.classList.remove("hide");
+
+    var scoreInputEl = document.querySelector("#score-input") 
+    console.log("score input", scoreInputEl.value, "total score", curScore );
+
+    var newScore = { //totalScore - object
+      initials: scoreInputEl.value, // property
+      score: curScore // property
+
+   };
+    if (totalScoreStorage) {
+        var totalScore = JSON.parse(localStorage.getItem("totalScore"));
+        totalScore.push(newScore);
+        localStorage.setItem( "totalScore", JSON.stringify(totalScore));
+        //grab entry and parse it if exists
+        // update storage and send back
+    } else {
+        localStorage.setItem( "totalScore", JSON.stringify([newScore]));
+    }
+    // total score - key // this will save score and intials into browsers local storage
+}
+
+function renderMessage() { // pulls out of local storage and parses it
+      var totalScore = JSON.parse(localStorage.getItem("totalScore")); //retireive using key name "totalScore"
+      if (totalScore !== null) {
+        document.querySelector(".top-scores").textContent = totalScore.initials + //this will append 
+        " received a/an " + totalScore.score
+
+      }
+      
+    }
+    
+
+
+function showHighscore() {
+    e.preventDefault();
+}
+
+
+function gameOver() {
+    questionContainerEl.style.display="none";
+    quizEndEl.classList.remove("hide");
+    document.querySelector(".finalscore").textContent = "you scored " + curScore + " points";
+    
+}
+
+function countdown() {
+  
+    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    var timeInterval = setInterval(function () {
+      // As long as the `timeLeft` is greater than 1
+      if (timeLeft > 1) {
+        // Set the `textContent` of `timerEl` to show the remaining seconds
+        timerEl.textContent = timeLeft + ' seconds remaining';
+        // Decrement `timeLeft` by 1
+        timeLeft--;
+      } else if (timeLeft === 1) {
+        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+        timerEl.textContent = timeLeft + ' second remaining';
+        timeLeft--;
+      } else {
+        // Once `timeLeft` gets to 0, set `timerEl` to an empty string
+        timerEl.textContent = '';
+        // Use `clearInterval()` to stop the timer
+        clearInterval(timeInterval);
+        // Call the `displayMessage()` function
+        gameOver();
+      }
+    }, 1000);
+  }
+
+
+// Array Question List
+  var questionList = [
+    {
+        questionText: "javaScript file has an extension of",
+        choices: [".java", ".js", ".javascript", ".xml"], 
+        answer: ".js"
+    },
+
+    {
+        questionText: "An array Index starts with?",
+        choices: ["-1", "0", "1", "2"],
+        answer: "0"
+    },
+
+    {
+        questionText: "In what year was javascript created?",
+        choices: ["1970", "1990", "1995", "1981"],
+        answer: "1995"
+    },
+
+    {
+        questionText: "What does HTML mean?",
+        choices: ["Hyper Text Markup Language", "Hyper Text Marketing Language", "Hyper Tension Marketing Language", "Hyper Trainer Marking Language"],
+        answer: "Hyper Text Markup Language"
+    },
+]
     
 
 // how to manually call buttons //
