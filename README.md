@@ -20,9 +20,9 @@ This project uses JavaScript features such as:
 * for loops
 
 ## Deployed page
-
+https://davidpascual2.github.io/Code-Quiz-HW4/
 ## Repository Link
-
+https://github.com/davidpascual2/Code-Quiz-HW4
 ## Preview
 ![](./assets/Code-Quiz_SC.png)
 
