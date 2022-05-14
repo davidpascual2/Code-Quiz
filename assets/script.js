@@ -5,7 +5,7 @@ var questionContainerEl = document.querySelector("#question-container");
 var answerButtonsEl = document.querySelector(".qbutton") //why is this needed?
 let currentQuestion = 0 //set to 0 because we want to start on first Question of questions array
 let curScore = 0;
-var timeLeft = 10;
+var timeLeft = 20;
 let quizEndEl = document.querySelector("#results-container"); 
 var timerEl = document.querySelector(".timer");
 var highscoreButtonEl = document.querySelector("#highscore-button")
@@ -20,7 +20,7 @@ startButton.addEventListener("click", startGame); //prevent default? where does 
 highscoreButtonEl.addEventListener("click", highscores);
 saveScoreButton.addEventListener("click", highscores);
 playAgainButton.addEventListener("click", refreshPage);
-// localStorage.setItem("studentGrade", JSON.stringify(studentGrade));
+// localStorage.setItem("studentGrade", JSON.str ingify(studentGrade));
     // renderMessage();
 
 function refreshPage() {
