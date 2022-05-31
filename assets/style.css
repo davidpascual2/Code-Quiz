@@ -38,7 +38,7 @@ p {
     align-items: center;
     max-width: 70rem;
     margin: 0 auto;
-    background-color: antiquewhite;
+    background-color: #999;
     padding: 2rem;
 }
 
@@ -61,7 +61,7 @@ p {
 }
 
 #question-container {
-    background-color: antiquewhite;
+    background-color: #999;
     /* border: 0.2rem solid blue; */
     width: 100vw;
     /* height: 100vh; */
