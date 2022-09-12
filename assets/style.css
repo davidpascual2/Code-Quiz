@@ -118,10 +118,13 @@ background-color: green;
 .red {
 background-color: red;
 }
-
+/* ==================================== */
 #highscores-container {
     text-align: center;
 }
+
+
+/* ==================================== */
 
 #results-container {
     text-align: center;

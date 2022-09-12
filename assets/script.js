@@ -4,7 +4,7 @@ var startButton = document.querySelector(".container"); //.start-button
 var questionContainerEl = document.querySelector("#question-container");
 var answerButtonsEl = document.querySelector(".qbutton") //why is this needed?
 let currentQuestion = 0 //set to 0 because we want to start on first Question of questions array
-let curScore = 0;
+let currentScore = 0;
 var timeLeft = 20;
 let quizEndEl = document.querySelector("#results-container"); 
 var timerEl = document.querySelector(".timer");
@@ -15,7 +15,7 @@ var topScoreList = document.querySelector(".top-scores")
 
 var playAgainButton = document.querySelector(".play-again")
 
-//click event 
+// Click Events
 startButton.addEventListener("click", startGame); //prevent default? where does it go?
 highscoreButtonEl.addEventListener("click", highscores);
 saveScoreButton.addEventListener("click", highscores);
@@ -23,13 +23,14 @@ playAgainButton.addEventListener("click", refreshPage);
 // localStorage.setItem("studentGrade", JSON.str ingify(studentGrade));
     // renderMessage();
 
+
 function refreshPage() {
     window.location.reload()
-}
+};
 
 //once start button is clicked, start page is hidden and quiz begins
 function startGame(){
-    curScore = 0;
+    currentScore = 0;
     // highscoresEl.style.display="none";
     startButton.style.display="none";
     questionContainerEl.classList.remove("hide");
@@ -41,7 +42,7 @@ function startGame(){
     
     showQuestion(); //create function below. cannot call if there is no function
     countdown()
-}
+};
 
 function showQuestion(){
 
@@ -58,21 +59,21 @@ function showQuestion(){
         buttonEl.addEventListener("click", selectAnswer)
 
     }
-} 
+}; 
 
 //set next question fucntion once next is pressed
 function selectAnswer(event){ 
     // check if user right or wrong 
     if(event.target.innerText === questionList[currentQuestion].answer){
         console.log("correct");
-        curScore += 1;
+        currentScore += 1;
         // add correct choice button here
         event.target.setAttribute("style", "background-color:green;")
-        console.log(curScore);
+        console.log(currentScore);
     }else{
         console.log("wrong");
         event.target.setAttribute("style", "background-color:red;")
-        // curScore = curScore - 1;
+        // currentScore = currentScore - 1;
         timeLeft -= 3;
     }
 
@@ -85,7 +86,7 @@ function selectAnswer(event){
         gameOver();
     }
     
-}
+};
 
 
 function highscores(e) {
@@ -103,11 +104,11 @@ function highscores(e) {
     highscoresEl.classList.remove("hide");
 
     var scoreInputEl = document.querySelector("#score-input") 
-    console.log("score input", scoreInputEl.value, "total score", curScore );
+    console.log("score input", scoreInputEl.value, "total score", currentScore );
 
     var newScore = { //totalScore - object
       initials: scoreInputEl.value, // property
-      score: curScore // property
+      score: currentScore // property
 
    };
     if (totalScoreStorage) {
@@ -120,7 +121,7 @@ function highscores(e) {
         localStorage.setItem( "totalScore", JSON.stringify([newScore]));
     }
     // total score - key // this will save score and intials into browsers local storage
-}
+};
 
 function renderMessage() { // pulls out of local storage and parses it
       var totalScore = JSON.parse(localStorage.getItem("totalScore")); //retireive using key name "totalScore"
@@ -130,21 +131,19 @@ function renderMessage() { // pulls out of local storage and parses it
 
       }
       
-    }
-    
-
+};
 
 function showHighscore() {
     e.preventDefault();
-}
+};
 
 
 function gameOver() {
     questionContainerEl.style.display="none";
     quizEndEl.classList.remove("hide");
-    document.querySelector(".finalscore").textContent = "you scored " + curScore + " points";
+    document.querySelector(".finalscore").textContent = "you scored " + currentScore + " points";
     
-}
+};
 
 function countdown() {
   
@@ -169,7 +168,7 @@ function countdown() {
         gameOver();
       }
     }, 1000);
-  }
+};
 
 
 // Array Question List
@@ -197,7 +196,7 @@ function countdown() {
         choices: ["Hyper Text Markup Language", "Hyper Text Marketing Language", "Hyper Tension Marketing Language", "Hyper Trainer Marking Language"],
         answer: "Hyper Text Markup Language"
     },
-]
+];
     
 
 // how to manually call buttons //
@@ -255,15 +254,15 @@ function countdown() {
    
     // };
     
-    // localStorage.setItem("curScore", JSON.stringify(curScore));
+    // localStorage.setItem("currentScore", JSON.stringify(currentScore));
     // renderMessage();
     
     // });
     
     // function renderMessage() {
-    //   var curScore = JSON.parse(localStorage.getItem("studentGrade"));
-    //   if (curScore !== null) {
-    //     document.querySelector(".message").textContent = curScore.student + 
+    //   var currentScore = JSON.parse(localStorage.getItem("studentGrade"));
+    //   if (currentScore !== null) {
+    //     document.querySelector(".message").textContent = currentScore.student + 
     //     " received a/an " + lastGrade.grade
     //   }
     // }
