@@ -61,7 +61,7 @@ p {
 }
 
 #question-container {
-    background-color: #999;
+    /* background-color: #999; */
     /* border: 0.2rem solid blue; */
     width: 100vw;
     /* height: 100vh; */
